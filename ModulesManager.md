@@ -94,3 +94,7 @@ its solution, expressed in plain language rather than raw system output. The
 opposite of logs: aimed at the user and also the technician. At which level this
 is achievable and how it fits into the bundle is not yet clear. Not planned for
 the near term.
+
+**UI self-description** — right now a module's bundle only tells the engine and API how to do things (state helpers, validators, action handlers). It says nothing about how a frontend should present those things. That's fine for one module and one CLI, but it won't scale: every new module means every frontend (CLI, TUI, future GUI) has to be hand-taught its properties, its actions, what they mean, how to lay them out. That's a per-module, per-frontend cost that multiplies as the module library grows.
+The likely direction is that a bundle should carry some description of itself — not a UI, not a layout, just enough plain data (what properties exist, what kind of value each one takes, what the actions are) that any frontend can build its own presentation from it without being told about that module in advance. The frontend still decides what a checkbox looks like; the module just says "this thing is a yes/no."
+Not designed. Just flagged so it's not forgotten — it should probably get shaped alongside the API Part of the bundle, since it's the same kind of "module describes itself to the layer above it" idea the validator already uses.
